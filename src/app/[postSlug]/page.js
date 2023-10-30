@@ -9,9 +9,13 @@ import { BLOG_TITLE } from "@/constants";
 import CodeSnippet from "@/components/CodeSnippet";
 import DivisionGroupsDemo from "@/components/DivisionGroupsDemo";
 import CircularColorsDemo from "@/components/CircularColorsDemo";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const blogPost = await loadBlogPost(params.postSlug);
+  if (!!!blogPost) {
+    notFound();
+  }
   const title = blogPost.frontmatter.title;
   const abstract = blogPost.frontmatter.abstract;
   return {
@@ -22,6 +26,9 @@ export async function generateMetadata({ params }) {
 
 async function BlogPost({ params }) {
   const blogPost = await loadBlogPost(params.postSlug);
+  if (!!!blogPost) {
+    notFound();
+  }
   const title = blogPost.frontmatter.title;
   const publishedOn = blogPost.frontmatter.publishedOn;
   return (

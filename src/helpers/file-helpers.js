@@ -26,7 +26,13 @@ export const getBlogPostList = React.cache(async () => {
 
 export const loadBlogPost = React.cache(async (slug) => {
   console.log("grabbing slug: ", slug);
-  const rawContent = await readFile(`/content/${slug}.mdx`);
+  let rawContent = null;
+  try {
+    rawContent = await readFile(`/content/${slug}.mdx`);
+  } catch (e) {
+    console.error("error finding file:", e);
+    return false;
+  }
 
   const { data: frontmatter, content } = matter(rawContent);
 
