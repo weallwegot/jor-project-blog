@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "new-component": "new-component"
+    "nc": "new-component"
   },
   "dependencies": {
     "bright": "0.8.4",
